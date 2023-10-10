@@ -26,6 +26,9 @@ namespace SimpleOffenceSuppression
 				if (settings->onlyCombat && !a_player->IsInCombat()) {
 					return fightReaction;
 				}
+				if (settings->ignoreCreatures && a_subject->HasKeyword(actorTypeCreatureKYWD)) {
+					return fightReaction;
+				}
 				if (settings->ignoreFriendlyFire && (a_subject->formFlags & 0x100000) == 0) {
 					a_subject->formFlags |= 0x100000;
 				}
@@ -59,11 +62,13 @@ namespace SimpleOffenceSuppression
 		const auto settings = Settings::GetSingleton();
 	    settings->Load();
 
-		REL::Relocation<std::uintptr_t> target{ REL::ID(151616), 0x22F };
+        const REL::Relocation<std::uintptr_t> target{ REL::ID(151616), 0x22F };
 		stl::write_thunk_call<GetFactionFightReaction>(target.address());
 
 		if (settings->changeGameSettings) {
 			RE::UI::GetSingleton()->RegisterSink(EventHandler::GetSingleton());
 		}
+
+		logger::info("Hooked GetFactionFightReaction");
 	}
 }

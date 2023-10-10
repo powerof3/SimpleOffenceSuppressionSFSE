@@ -6,6 +6,12 @@ void MessageHandler(SFSE::MessagingInterface::Message* a_message)
 	case SFSE::MessagingInterface::kPostLoad:
 		SimpleOffenceSuppression::InstallOnPostLoad();
 		break;
+	case SFSE::MessagingInterface::kPostDataLoad:
+		{
+			SimpleOffenceSuppression::actorTypeCreatureKYWD = starfield_cast<RE::BGSKeyword*>(RE::TESForm::LookupByID(0x001469CF));
+			logger::info("ActorTypeCreature keyword lookup {}", SimpleOffenceSuppression::actorTypeCreatureKYWD != nullptr ? "succeeded" : "failed");
+		}
+		break;
 	default:
 		break;
 	}
@@ -17,11 +23,11 @@ DLLEXPORT constinit auto SFSEPlugin_Version = []() noexcept {
 	data.PluginVersion(Version::MAJOR);
 	data.PluginName(Version::PROJECT);
 	data.AuthorName("powerofthree");
-	data.UsesSigScanning(true);
-	//data.UsesAddressLibrary(true);
-	data.HasNoStructUse(true);
-	//data.IsLayoutDependent(true);
-	data.CompatibleVersions({ SFSE::RUNTIME_SF_1_7_29 });
+	data.UsesSigScanning(false);
+	data.UsesAddressLibrary(true);
+	data.HasNoStructUse(false);
+	data.IsLayoutDependent(true);
+	data.CompatibleVersions({ SFSE::RUNTIME_LATEST });
 
 	return data;
 }();
