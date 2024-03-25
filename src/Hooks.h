@@ -12,7 +12,7 @@ namespace SimpleOffenceSuppression
 {
 	inline RE::BGSKeyword* actorTypeCreatureKYWD{ nullptr };
 
-    struct GetFactionFightReaction
+	struct GetFactionFightReaction
 	{
 		static RE::FIGHT_REACTION                      thunk(RE::Actor* a_subject, RE::Actor* a_player);
 		static inline REL::Relocation<decltype(thunk)> func;

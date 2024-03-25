@@ -40,8 +40,8 @@ namespace SimpleOffenceSuppression
 
 	RE::BSEventNotifyControl EventHandler::ProcessEvent(const RE::MenuOpenCloseEvent& a_event, RE::BSTEventSource<RE::MenuOpenCloseEvent>*)
 	{
-	    if (a_event.menuName == "HUDMenu" && a_event.opening) {
-	        constexpr auto set_gmst = [](const char* a_name, std::int32_t a_value) {
+		if (a_event.menuName == "HUDMenu" && a_event.opening) {
+			constexpr auto set_gmst = [](const char* a_name, std::int32_t a_value) {
 				RE::ExecuteCommand(RE::BGSScaleFormManager(), std::format("SetGS {} {}", a_name, a_value).c_str());
 				logger::info("Gamesetting : {} : {}", a_name, a_value);
 			};
@@ -60,9 +60,9 @@ namespace SimpleOffenceSuppression
 	void InstallOnPostLoad()
 	{
 		const auto settings = Settings::GetSingleton();
-	    settings->Load();
+		settings->Load();
 
-        const REL::Relocation<std::uintptr_t> target{ REL::ID(151616), 0x22F };
+		const REL::Relocation<std::uintptr_t> target{ REL::ID(151616), 0x244 };
 		stl::write_thunk_call<GetFactionFightReaction>(target.address());
 
 		if (settings->changeGameSettings) {

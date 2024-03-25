@@ -8,7 +8,7 @@ void MessageHandler(SFSE::MessagingInterface::Message* a_message)
 		break;
 	case SFSE::MessagingInterface::kPostDataLoad:
 		{
-			SimpleOffenceSuppression::actorTypeCreatureKYWD = starfield_cast<RE::BGSKeyword*>(RE::TESForm::LookupByID(0x001469CF));
+			SimpleOffenceSuppression::actorTypeCreatureKYWD = RE::TESForm::LookupByID<RE::BGSKeyword>(0x001469CF);
 			logger::info("ActorTypeCreature keyword lookup {}", SimpleOffenceSuppression::actorTypeCreatureKYWD != nullptr ? "succeeded" : "failed");
 		}
 		break;
