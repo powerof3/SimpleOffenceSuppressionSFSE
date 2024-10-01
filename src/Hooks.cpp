@@ -29,8 +29,8 @@ namespace SimpleOffenceSuppression
 				if (settings->ignoreCreatures && a_subject->HasKeyword(actorTypeCreatureKYWD)) {
 					return fightReaction;
 				}
-				if (settings->ignoreFriendlyFire && (a_subject->formFlags & 0x100000) == 0) {
-					a_subject->formFlags |= 0x100000;
+				if (settings->ignoreFriendlyFire && a_subject->formFlags.none(RE::TESForm::FormFlags::kIgnoreFriendlyHits)) {
+					a_subject->formFlags.set(RE::TESForm::FormFlags::kIgnoreFriendlyHits);
 				}
 				return settings->newReaction;
 			}
