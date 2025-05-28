@@ -1,15 +1,17 @@
 {
   "name": "simple-offense-suppression",
-  "version-string": "1.1.3",
+  "version-string": "2.0.0",
   "description": "",
   "homepage": "",
-  "license": "MIT",
+  "license": "GPL-3.0-or-later",
   "dependencies": [
-    "boost-stl-interfaces",
     "clib-util",
     "rsm-binary-io",
-    "spdlog",
+    {
+      "name": "spdlog",
+      "features": [ "wchar" ]
+    },
     "xbyak"
   ],
-  "builtin-baseline": "76d153790caf0592fce8fc4484aa6db18c7d00d4"
+  "builtin-baseline": "7bf98dbcba23cd813e2dbe6319b6b0ed71652319"
 }
